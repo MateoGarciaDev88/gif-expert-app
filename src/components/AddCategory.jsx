@@ -1,7 +1,7 @@
 import { useState } from "react";
 import PropTypes from 'prop-types';
 
-const AddCategory = ({ categories, setCategories }) => {
+const AddCategory = ({ onNewCategorie }) => {
   const [inputValue, setInputValue] = useState('');
 
   const onInputChange = ({ target }) => {
@@ -13,11 +13,8 @@ const AddCategory = ({ categories, setCategories }) => {
     
     if (inputValue.trim().length <= 1) return;
 
-    setCategories([
-      inputValue,
-      ...categories,
-    ]);
-
+    // setCategories( categories => [inputValue, ...categories]);
+    onNewCategorie(inputValue.trim())
     setInputValue('');
   }
 
@@ -36,6 +33,7 @@ const AddCategory = ({ categories, setCategories }) => {
 AddCategory.propTypes = {
   categories: PropTypes.array,
   setCategories: PropTypes.func,
+  onNewCategorie: PropTypes.func,
 }
 
 export default AddCategory;
